@@ -1,157 +1,98 @@
-<div ng-app="myApp">
-  <div>
-    <button class="btn btn-info catbutton" ng-click="addCategory();clearCat()">
-      add languages
-    </button>
-  </div>
-  <div class="section-body mt-3">
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
     <div class="container-fluid">
+      <div class="section-body mt-4">
       <div class="tab-content">
-        <div class="tab-pane active" id="Dep-all">
-          <div class="table-responsive">
-            <div class="table-responsive card">
-              <table
-                class="table table-hover table-striped table-vcenter text-nowrap mb-0"
-              >
-                <thead>
-                  <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Created date</th>
-                    <th>Updated date</th>
-                    <th>Created By</th>
-                    <th>Updated By</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr
-                    ng-repeat="x in cats"
-                    ng-click="editCat(x);$parent.catpop=true;$parent.catedit=$parent.catdelete=true;$parent.cat=$parent.addcatbtn=false;"
-                  >
-                    <td>{{x.languageId}}</td>
-                    <td>{{x.languageName}}</td>
-                    <td>{{x.description}}</td>
-                    <td>{{x.createdDate}}</td>
-                    <td>{{x.updatedDate}}</td>
-                    <td>{{x.createdBy}}</td>
-                    <td>{{x.updatedBy}}</td>
-                    <td>
-                      <button
-                        type="button"
-                        class="btn btn-icon btn-sm"
-                        title="View"
-                      >
-                        <i class="fa fa-eye"></i>
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-icon btn-sm"
-                        title="Edit"
-                      >
-                        <i class="fa fa-edit"></i>
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-icon btn-sm js-sweetalert"
-                        title="Delete"
-                        data-type="confirm"
-                      >
-                        <i class="fa fa-trash-o text-danger"></i>
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-
-                <tfoot>
-                  <tr>
-                    <td align="center" colspan="6   ">
-                      <span class="form-group pull-left page-size form-inline">
-                        <select
-                          id="ddlPageSize"
-                          class="form-control control-color"
-                          ng-model="pageSize"
-                          ng-change="changePageSize()"
-                        >
-                          <option value="2">2</option>
-                          <option value="5">5</option>
-                          <option value="10">10</option>
-                          <option value="25">25</option>
-                          <option value="50">50</option>
-                        </select>
-                      </span>
-                      <div class="pull-right pagination">
-                        <pagination
-                          total-items="totalItemsL"
-                          ng-model="pageIndex"
-                          items-per-page="pageSize"
-                          ng-change="pageChange()"
-                        ></pagination>
-                        <!-- <pagination total-items="totalItemsL" ng-change="pageChange()" items-per-page="pageSize" direction-links="true" ng-model="pageIndex" max-size="maxSize" class="pagination" boundary-links="true" rotate="false" num-pages="numPagesL"></pagination> -->
-                        <!-- <a class="btn">Page: {{pageIndex}} / {{numPagesL}} {{totalItemsL}}</a> -->
-                      </div>
-                    </td>
-                  </tr>
-                </tfoot>
-              </table>
-            </div>
+          <div class="tab-pane active" id="Dep-all">
+              <div class="table-responsive">
+                  <div class="table-responsive card">
+                      <table class="table table-hover table-striped table-vcenter text-nowrap mb-0">
+                          <thead>
+                              <tr>
+                                  <th>#</th>
+                                  <th>Dept. Name</th>
+                                  <th>Head OF Dept.</th>
+                                  <th>Phone</th>
+                                  <th>Email</th>
+                                  <th>establish</th>
+                                  <th>Std. Capacity</th>
+                                  <th>Edit</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td>1</td>
+                                  <td>Mechanical Engg.</td>
+                                  <td>Emmett L Johnson</td>
+                                  <td>+123 4567890</td>
+                                  <td>test@example.com</td>
+                                  <td>1998</td>
+                                  <td>150</td>
+                                  <td>
+                                      <button type="button" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></button>
+                                      <button type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit"></i></button>
+                                      <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button>
+                                  </td>
+                              </tr>
+                        </tbody>
+                      </table>
+                  </div>        
+              </div>
           </div>
-        </div>
+          <div class="tab-pane" id="Dep-add-Boot">
+              <div class="card">
+                  <div class="card-header">
+                      <h3 class="card-title">Add Department</h3>
+                      <div class="card-options ">
+                          <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+                          <a href="#" class="card-options-remove" data-toggle="card-remove"><i class="fe fe-x"></i></a>
+                      </div>
+                  </div>
+                  <form class="card-body">
+                      <div class="form-group row">
+                          <label class="col-md-3 col-form-label">Department Name <span class="text-danger">*</span></label>
+                          <div class="col-md-7">
+                              <input type="text" class="form-control">
+                          </div>
+                      </div>
+                      <div class="form-group row">
+                          <label class="col-md-3 col-form-label">Head Of Department</label>
+                          <div class="col-md-7">
+                              <input type="text" class="form-control">
+                          </div>
+                      </div>
+                      <div class="form-group row">
+                          <label class="col-md-3 col-form-label">Department Start Date <span class="text-danger">*</span></label>
+                          <div class="col-md-7">
+                              <input data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="">
+                          </div>
+                      </div>
+                      <div class="form-group row">
+                          <label class="col-md-3 col-form-label">Student Capacity <span class="text-danger">*</span></label>
+                          <div class="col-md-7">
+                              <input type="text" class="form-control">
+                          </div>
+                      </div>
+                      <div class="form-group row">
+                          <label class="col-md-3 col-form-label">Department Details <span class="text-danger">*</span></label>
+                          <div class="col-md-7">
+                              <textarea rows="4" class="form-control no-resize" placeholder="Please type what you want..."></textarea>
+                          </div>
+                      </div>
+                      <div class="form-group row">
+                          <label class="col-md-3 col-form-label"></label>
+                          <div class="col-md-7">
+                              <button type="submit" class="btn btn-primary">Submit</button>
+                              <button type="submit" class="btn btn-outline-secondary">Cancel</button>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
       </div>
-    </div>
-  </div>
-</div>
 
-<!---------------- language add ---------------->
-<div class="card" ng-show="catpop">
-  <div class="card-header">
-    <h3 class="card-title">Languages</h3>
-    <div class="card-options">
-      <a href="" ng-click="closeCategory()"><i class="fe fe-x"></i></a>
-    </div>
-  </div>
-  <form class="card-body">
-    <div class="form-group row">
-      <label class="col-md-3 col-form-label">Language Name</label>
-      <div class="col-md-7">
-        <input type="text" ng-model="cat.languageName" class="form-control" />
-      </div>
-    </div>
-    <div class="form-group row">
-      <label class="col-md-3 col-form-label">Language Description</label>
-      <div class="col-md-7">
-        <input type="text" ng-model="lang.description" class="form-control" />
-      </div>
-    </div>
-    <div class="form-group row">
-      <label class="col-md-3 col-form-label"></label>
-      <div class="col-md-7" style="height: 100px">
-        <button
-          type="submit"
-          class="btn btn-primary"
-          ng-show="addlanbtn"
-          ng-click="addLang()"
-        >
-          Add
-        </button>
-        <button
-          type="submit"
-          class="btn btn-primary"
-          ng-show="catedit"
-          ng-click="addCat()"
-        >
-          Update
-        </button>
-        <button
-          type="submit"
-          class="btn btn-outline-danger"
-          ng-show="catdelete"
-          ng-click="deleteCat()"
-        >
-          Delete
-        </button>
-      </div>
-    </div>
-  </form>
+</div>
+</div>
+</div>
 </div>
