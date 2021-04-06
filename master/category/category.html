@@ -1,0 +1,157 @@
+<div ng-app="myApp">
+  <div>
+    <button class="btn btn-info catbutton" ng-click="addCategory();clearCat()">
+      add languages
+    </button>
+  </div>
+  <div class="section-body mt-3">
+    <div class="container-fluid">
+      <div class="tab-content">
+        <div class="tab-pane active" id="Dep-all">
+          <div class="table-responsive">
+            <div class="table-responsive card">
+              <table
+                class="table table-hover table-striped table-vcenter text-nowrap mb-0"
+              >
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Created date</th>
+                    <th>Updated date</th>
+                    <th>Created By</th>
+                    <th>Updated By</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    ng-repeat="x in cats"
+                    ng-click="editCat(x);$parent.catpop=true;$parent.catedit=$parent.catdelete=true;$parent.cat=$parent.addcatbtn=false;"
+                  >
+                    <td>{{x.languageId}}</td>
+                    <td>{{x.languageName}}</td>
+                    <td>{{x.description}}</td>
+                    <td>{{x.createdDate}}</td>
+                    <td>{{x.updatedDate}}</td>
+                    <td>{{x.createdBy}}</td>
+                    <td>{{x.updatedBy}}</td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-icon btn-sm"
+                        title="View"
+                      >
+                        <i class="fa fa-eye"></i>
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-icon btn-sm"
+                        title="Edit"
+                      >
+                        <i class="fa fa-edit"></i>
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-icon btn-sm js-sweetalert"
+                        title="Delete"
+                        data-type="confirm"
+                      >
+                        <i class="fa fa-trash-o text-danger"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+
+                <tfoot>
+                  <tr>
+                    <td align="center" colspan="6   ">
+                      <span class="form-group pull-left page-size form-inline">
+                        <select
+                          id="ddlPageSize"
+                          class="form-control control-color"
+                          ng-model="pageSize"
+                          ng-change="changePageSize()"
+                        >
+                          <option value="2">2</option>
+                          <option value="5">5</option>
+                          <option value="10">10</option>
+                          <option value="25">25</option>
+                          <option value="50">50</option>
+                        </select>
+                      </span>
+                      <div class="pull-right pagination">
+                        <pagination
+                          total-items="totalItemsL"
+                          ng-model="pageIndex"
+                          items-per-page="pageSize"
+                          ng-change="pageChange()"
+                        ></pagination>
+                        <!-- <pagination total-items="totalItemsL" ng-change="pageChange()" items-per-page="pageSize" direction-links="true" ng-model="pageIndex" max-size="maxSize" class="pagination" boundary-links="true" rotate="false" num-pages="numPagesL"></pagination> -->
+                        <!-- <a class="btn">Page: {{pageIndex}} / {{numPagesL}} {{totalItemsL}}</a> -->
+                      </div>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!---------------- language add ---------------->
+<div class="card" ng-show="catpop">
+  <div class="card-header">
+    <h3 class="card-title">Languages</h3>
+    <div class="card-options">
+      <a href="" ng-click="closeCategory()"><i class="fe fe-x"></i></a>
+    </div>
+  </div>
+  <form class="card-body">
+    <div class="form-group row">
+      <label class="col-md-3 col-form-label">Language Name</label>
+      <div class="col-md-7">
+        <input type="text" ng-model="cat.languageName" class="form-control" />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-md-3 col-form-label">Language Description</label>
+      <div class="col-md-7">
+        <input type="text" ng-model="lang.description" class="form-control" />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-md-3 col-form-label"></label>
+      <div class="col-md-7" style="height: 100px">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          ng-show="addlanbtn"
+          ng-click="addLang()"
+        >
+          Add
+        </button>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          ng-show="catedit"
+          ng-click="addCat()"
+        >
+          Update
+        </button>
+        <button
+          type="submit"
+          class="btn btn-outline-danger"
+          ng-show="catdelete"
+          ng-click="deleteCat()"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
