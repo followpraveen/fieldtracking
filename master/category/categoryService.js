@@ -1,14 +1,13 @@
-myApp.service('categoryService',['$http',function($http){
+myApp.service('categoryService', ['$http', function ($http) {
 
-     
-    this.creatSite= function(cat){
+
+
+    this.getallCat = function (pageIndex, pageSize) {
         return $http({
-            method: "POST",
-            url: "https://executivetracking.cloudjiffy.net/ExecutiveTrackingWeb/category/v1/createCategory",
-            data: JSON.stringify(cat)
-        })
+            method: 'GET',
+            url: "https://executivetracking.cloudjiffy.net/ExecutiveTrackingWeb/category/v1/getAllCategoryByPagination/{pageNumber}/{pageSize}?pageNumber=" + pageIndex + "&pageSize=" + pageSize
+        });
     }
-
 
 
 
@@ -43,4 +42,4 @@ myApp.service('categoryService',['$http',function($http){
     //         })
     //     }
     // // //////////////////////////////////////end of language service/////////////////////////////////////////////
-    }]);
+}]);
