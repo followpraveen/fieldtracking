@@ -32,7 +32,4 @@ myApp.service('categoryService', ['$http', function ($http) {
             url: URL + "category/v1/deleteCategoryByCategoryId/" + cats.categoryId
         })
     }
-
-
-
 }]);

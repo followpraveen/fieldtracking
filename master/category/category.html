@@ -100,7 +100,7 @@
       <!-- Button Created -->
       <div class="btnz-holder">
         <button class="btnz btnz-2 hover-opacity">
-          <a href=""><span ng-click="addcat();">Add Category</span></a>
+          <a href=""><span ng-click="addcat(); clearcats(); $parent.catedit=$parent.catdelete=false;">Add Category</span></a>
         </button>
     </div>
 
@@ -125,7 +125,7 @@
                           </thead>
                           <tbody>
                               <tr ng-repeat = "x in categ"
-                              ng-click="$parent.catpop=true;$parent.catedit=$parent.catdelete=true;$parent.addcatbtn=false;">
+                              ng-click="editcats(x); $parent.catpop=true;$parent.catedit=$parent.catdelete=true;$parent.addcatbtn=false;">
                                   <td>{{x.categoryId}}</td>
                                   <td>{{x.categoryName}}</td>
                                   <td>{{x.categoryCode}}</td>
@@ -134,7 +134,7 @@
                                   <td>
                                       <!-- <button type="button" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></button> -->
                                       <button type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit text-success"></i></button>
-                                      <button type="button" class="btn btn-icon btn-sm" title="Delete"><i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                                      <button type="button" class="btn btn-icon btn-sm" title="Delete"><i class="fa fa-trash text-danger" ng-click="deletecats();"></i>
                                       </button>
                                       <!-- <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button> -->
                                   </td>
@@ -143,7 +143,7 @@
 
                         <tfoot>  
                           <tr>  
-                              <td align="center" colspan="6   ">  
+                              <td align="center" colspan="6">  
                                   <span class="form-group pull-left page-size form-inline">  
                                       <select id="ddlPageSize" class="form-control control-color"  
                                               ng-model="pageSize"  
@@ -157,13 +157,12 @@
                                   </span>  
                                   <div class="pull-right pagination">
                                       <pagination total-items="totalItemsC" ng-model="pageIndex" items-per-page="pageSize" ng-change="pageChange()"></pagination>
-                                      <pagination total-items="totalItemsL" ng-change="pageChange()" items-per-page="pageSize" direction-links="true" ng-model="pageIndex" max-size="maxSize" class="pagination" boundary-links="true" rotate="false" num-pages="numPagesL"></pagination>
-                                      <a class="btn">Page: {{pageIndex}} / {{numPagesL}} {{totalItemsL}}</a>
+                                      <!-- <pagination total-items="totalItemsL" ng-change="pageChange()" items-per-page="pageSize" direction-links="true" ng-model="pageIndex" max-size="maxSize" class="pagination" boundary-links="true" rotate="false" num-pages="numPagesL"></pagination>
+                                      <a class="btn">Page: {{pageIndex}} / {{numPagesL}} {{totalItemsL}}</a> -->
                                   </div>
                               </td>  
-                          </tr>  
+                          </tr>
                       </tfoot> 
-
                       </table>
                   </div>        
               </div>
@@ -175,39 +174,39 @@
 </div>
 
 <!---------------- Add Category part start ---------------->
-<div class="content-wrapper">
-<form class="card-body" ng-show="catpop">
+<div class="content-wrapper" ng-show="catpop">
+<form class="card-body">
   <div class="form-group row">
       <div class="col-md-12">
         <label class="col-form-label blu-colr">Categories</label>
-        <a href="" ng-click="closeCat();loadCategory();"><i class="fa fa-times float-right"></i></a>
+        <a href="" ng-click="closeCat(); loadCategory();"><i class="fa fa-times float-right"></i></a>
       </div>
   </div>
   <div class="form-group row">
-      <label class="col-md-3 col-form-label" ng-model="cats.categoryName">Category Name</label>
+      <label class="col-md-3 col-form-label">Category Name</label>
       <div class="col-md-7">
-          <input type="text" class="form-control">
+          <input type="text" class="form-control" ng-model="cats.categoryName">
           <div class="invalid-feedback">*required</div>
       </div>
   </div>
   <div class="form-group row">
-      <label class="col-md-3 col-form-label" ng-model="cats.categoryCode">Category Code</label>
+      <label class="col-md-3 col-form-label">Category Code</label>
       <div class="col-md-7">
-          <input data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="">
+          <input data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="" ng-model="cats.categoryCode">
       </div>
       <div class="invalid-feedback">*required</div>
   </div>
   <div class="form-group row">
-      <label class="col-md-3 col-form-label" ng-model="cats.description">Description</label>
+      <label class="col-md-3 col-form-label">Description</label>
       <div class="col-md-7">
-          <textarea rows="4" class="form-control no-resize" placeholder="Please type briefly..."></textarea>
+          <textarea rows="4" class="form-control no-resize" placeholder="Please type briefly..." ng-model="cats.description"></textarea>
       </div>
   </div>
   <div class="form-group row">
       <label class="col-md-3 col-form-label"></label>
       <div class="col-md-7">
-          <button type="submit" class="btn btn-outline-primary" ng-show="addcatbtn" ng-click="addcats()">Add</button>
-          <button type="submit" class="btn btn-outline-primary" ng-show="catedit" ng-click="addcats()">Update</button>
+          <button type="submit" class="btn btn-outline-primary" ng-show="addcatbtn" ng-click="addcats(); loadCategory();">Add</button>
+          <button type="submit" class="btn btn-outline-primary" ng-show="catedit" ng-click="addcats(); loadCategory();">Update</button>
           <button type="submit" class="btn btn-outline-danger" ng-show="catdelete"
           ng-click="deletecats()">Delete</button>
       </div>
@@ -215,3 +214,12 @@
 </form>
 </div>
 <!--------------------------------------- end of category --------------------------------------------------->
+
+<ul class="pagination ng-isolate-scope ng-not-empty ng-valid" total-items="totalItemsC" ng-model="pageIndex" items-per-page="pageSize" ng-change="pageChange()">
+  <!-- ngIf: ::boundaryLinks -->
+  <!-- ngIf: ::directionLinks --><li ng-if="::directionLinks" ng-class="{disabled: noPrevious()||ngDisabled}" class="pagination-prev ng-scope disabled"><a href="" ng-click="selectPage(page - 1, $event)" class="ng-binding">Previous</a></li><!-- end ngIf: ::directionLinks -->
+  <!-- ngRepeat: page in pages track by $index --><li ng-repeat="page in pages track by $index" ng-class="{active: page.active,disabled: ngDisabled&amp;&amp;!page.active}" class="pagination-page ng-scope active"><a href="" ng-click="selectPage(page.number, $event)" class="ng-binding">1</a></li><!-- end ngRepeat: page in pages track by $index -->
+  <!-- ngIf: ::directionLinks --><li ng-if="::directionLinks" ng-class="{disabled: noNext()||ngDisabled}" class="pagination-next ng-scope disabled"><a href="" ng-click="selectPage(page + 1, $event)" class="ng-binding">Next</a></li><!-- end ngIf: ::directionLinks -->
+  <!-- ngIf: ::boundaryLinks -->
+</ul>
+

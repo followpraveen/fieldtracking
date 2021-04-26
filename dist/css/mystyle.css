@@ -54,7 +54,7 @@
 .btnz-2 span:hover {
   color: rgb(255, 255, 255);
   transition: 0.2s 0.1s;
-  background-color: rgb(28, 31, 30);
+  background-color: #212529;
   border-radius: 5px;
 }
 

@@ -1,6 +1,6 @@
 'use strict';
 
-var myApp = angular.module('myApp.category', ['ngRoute']);
+var myApp = angular.module('myApp.category', ['ngRoute', 'ui.bootstrap']);
 var tkn = localStorage.getItem("token");
 var usId = localStorage.getItem("userId");
 console.log(tkn);
@@ -90,7 +90,7 @@ myApp.controller('categoryCtrl', ['$scope', 'categoryService', function ($scope,
     $scope.cats.categoryCode = x.categoryCode;
     console.log($scope.cats);
   }
-  $scope.deleteLang = function () {
+  $scope.deletecats = function () {
 
     Swal.fire({
       title: "Are you sure?",
@@ -101,11 +101,11 @@ myApp.controller('categoryCtrl', ['$scope', 'categoryService', function ($scope,
       confirmButtonText: "Yes, delete it!"
     }).then((result) => {
       if (result.isConfirmed) {
-        appService.deleteLang($scope.lang).then(function () {
+        categoryService.deletecats($scope.cats).then(function () {
           $scope.pageChange();
           Swal.fire("Deleted!");
         });
-        $scope.loadLanguage();
+        $scope.loadCategory();
       }
     });
 
@@ -119,10 +119,16 @@ myApp.controller('categoryCtrl', ['$scope', 'categoryService', function ($scope,
     console.log($scope.cats);
   }
   $scope.addcats = function () {
-    appService.addcats($scope.cats).then(function (response) {
+    categoryService.addcats($scope.cats).then(function (response) {
       $scope.pageChange();
       if (response.data.responseCode == 201) {
-        swal("Done!", "", "success");
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Done!',
+          showConfirmButton: false,
+          timer: 1500
+        })
       }
       else {
         swal("Failed!", "", "warning");
@@ -132,15 +138,14 @@ myApp.controller('categoryCtrl', ['$scope', 'categoryService', function ($scope,
 
   }
 
-
-
+  $scope.tabShow = true;
 
   $scope.closeCat = function () {
     $scope.catpop = false;
   }
 
   $scope.addcat = function () {
-    $scope.catpop = $scope.addcatbtn = true; $scope.catedit = $scope.tabShow = catdelete = false;
+    $scope.catpop = $scope.addcatbtn = true; $scope.catedit = $scope.catdelete = false;
   }
 
   $scope.loadCategory = function () {
