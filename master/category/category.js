@@ -17,7 +17,6 @@ myApp.config(['$routeProvider', function ($routeProvider) {
 
 myApp.controller('categoryCtrl', ['$scope', 'categoryService', function ($scope, categoryService) {
 
-  ////////////////////////////////////// catsuage section ///////////////////////////////////////////////////////
 
   ////////////////pagination////////////////////
 
@@ -25,20 +24,9 @@ myApp.controller('categoryCtrl', ['$scope', 'categoryService', function ($scope,
   $scope.pageSize = 2;
   $scope.pageIndex = 0;
   $scope.maxSize = 6;
-  $scope.totalItemsC = 0;
-  $scope.numPagesC = "";
+  $scope.totalItems = 0;
+  $scope.numPages = "";
   // $scope.pagesizeSelected="";
-
-
-  $scope.cats = {
-    categoryName: "",
-    categoryCode: "",
-    description: "",
-    createdBy:
-    {
-      userId: usId
-    }
-  }
 
   $scope.categ = [];
   getallCat();
@@ -48,14 +36,28 @@ myApp.controller('categoryCtrl', ['$scope', 'categoryService', function ($scope,
       console.log(response.data.content);
       angular.forEach(response.data.content, function (value) {
         $scope.categ.push({
-          categoryId: value.categoryId, categoryName: value.categoryName, categoryCode: value.categoryCode, description: value.description,
+          categoryId: value.categoryId, categoryName: value.categoryName, description: value.description,
           createdDate: value.insertedDate, updatedDate: value.updatedDate, createdBy: value.createdBy.userName
         });
-        $scope.totalItemsC = response.data.totalElements;
-        $scope.numPagesC = response.data.totalPages;
+        $scope.totalItems = response.data.totalElements;
+        $scope.numPages = response.data.totalPages;
       });
     });
   }
+
+
+  $scope.cats = {
+    categoryName: "",
+    // categoryCode: "",
+    description: "",
+    createdBy:
+    {
+      userId: usId
+    },
+    updatedBy: {
+      userId: usId
+    }
+  };
 
   $scope.changePageSize = function () {
     $scope.pageIndex = 0;
@@ -78,7 +80,7 @@ myApp.controller('categoryCtrl', ['$scope', 'categoryService', function ($scope,
       userId: usId
     },
     description: "",
-    categoryCode: "",
+    // categoryCode: "",
     categoryName: "",
     categoryId: ""
   };
@@ -87,7 +89,7 @@ myApp.controller('categoryCtrl', ['$scope', 'categoryService', function ($scope,
     $scope.cats.categoryName = x.categoryName;
     $scope.cats.description = x.description;
     $scope.cats.categoryId = x.categoryId;
-    $scope.cats.categoryCode = x.categoryCode;
+    // $scope.cats.categoryCode = x.categoryCode;
     console.log($scope.cats);
   }
   $scope.deletecats = function () {
@@ -115,7 +117,7 @@ myApp.controller('categoryCtrl', ['$scope', 'categoryService', function ($scope,
     $scope.cats.categoryName = "";
     $scope.cats.description = "";
     $scope.cats.categoryId = "";
-    $scope.cats.categoryCode = "";
+    // $scope.cats.categoryCode = "";
     console.log($scope.cats);
   }
   $scope.addcats = function () {

@@ -10,7 +10,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Master</a></li>
-                        <li class="breadcrumb-item active">Category</li>
+                        <li class="breadcrumb-item active">Product</li>
                     </ol>
                 </div>
                 <!-- /.col -->
@@ -100,12 +100,12 @@
       <!-- Button Created -->
       <div class="btnz-holder">
         <button class="btnz btnz-2 hover-opacity">
-          <a href=""><span ng-click="addcat(); clearcats(); $parent.catedit=$parent.catdelete=false;">Add Category</span></a>
+          <a href=""><span ng-click="addDuct(); clearDuct(); $parent.proedit=$parent.prodelete=false;">Add Product</span></a>
         </button>
     </div>
 
   <!-- Content Header (Page header) -->
-  <div class="content-header" ng-show="tabShow">
+  <div class="content-header" ng-show="proShow">
     <div class="container-fluid">
       <div class="section-body mt-4">
       <div class="tab-content">
@@ -126,10 +126,10 @@
                               </tr>
                           </thead>
                           <tbody>
-                              <tr ng-repeat = "x in categ"
-                              ng-click="editcats(x); $parent.catpop=true;$parent.catedit=$parent.catdelete=true;$parent.addcatbtn=false;">
-                                  <td>{{x.categoryId}}</td>
-                                  <td>{{x.categoryName}}</td>
+                              <tr ng-repeat = "x in prods"
+                              ng-click="editProduct(x); $parent.propop=true;$parent.proedit=$parent.prodelete=true;$parent.addprobtn=false;">
+                                  <td>{{x.productId}}</td>
+                                  <td>{{x.productName}}</td>
                                   <td>{{x.description}}</td>
                                   <td>{{x.createdDate}}</td>
                                   <td>{{x.updatedDate}}</td>
@@ -178,18 +178,18 @@
 </div>
 
 <!---------------- Add Category part start ---------------->
-<div class="content-wrapper" ng-show="catpop">
+<div class="content-wrapper" ng-show="propop">
 <form class="card-body was-validated" name="myform">
   <div class="form-group row">
       <div class="col-md-12">
-        <label class="col-form-label blu-colr">Categories</label>
-        <a href="" ng-click="closeCat(); loadCategory();"><i class="fa fa-times float-right"></i></a>
+        <label class="col-form-label blu-colr">Products</label>
+        <a href="" ng-click="closeDuct(); loadProduct();"><i class="fa fa-times float-right"></i></a>
       </div>
   </div>
   <div class="form-group row">
-      <label class="col-md-3 col-form-label">Category Name</label>
+      <label class="col-md-3 col-form-label">Product Name</label>
       <div class="col-md-7">
-          <input type="text" maxlength="30" class="form-control" ng-model="cats.categoryName" name="name" 
+          <input type="text" maxlength="30" class="form-control" ng-model="pro.productName" name="name" 
           placeholder="max characters 30" required>
           <div class="invalid-feedback">*required</div>
       </div>
@@ -198,19 +198,19 @@
       <label class="col-md-3 col-form-label">Description</label>
       <div class="col-md-7">
         <input maxlength="250" class="form-control no-resize" placeholder="max characters 250"
-        ng-model="cats.description"  name="descript" required>
+        ng-model="pro.description"  name="descript" required>
           <div class="invalid-feedback">*required</div>
       </div>
   </div>
   <div class="form-group row">
       <label class="col-md-3 col-form-label"></label>
       <div class="col-md-7">
-          <button type="submit" class="btn btn-outline-primary" ng-show="addcatbtn" ng-click="addcats(); loadCategory();"
+          <button type="submit" class="btn btn-outline-primary" ng-show="addprobtn" ng-click="addDuct(); loadProduct();"
           ng-disabled= !myform.name.$valid||!myform.descript.$valid>Add</button>
-          <button type="submit" class="btn btn-outline-primary" ng-show="catedit" ng-click="addcats(); loadCategory();"
+          <button type="submit" class="btn btn-outline-primary" ng-show="proedit" ng-click="addcats(); loadProduct();"
           ng-disabled= !myform.name.$valid||!myform.descript.$valid>Update</button>
-          <button type="submit" class="btn btn-outline-danger" ng-show="catdelete"
-          ng-click="deletecats();">Delete</button>
+          <button type="submit" class="btn btn-outline-danger" ng-show="prodelete"
+          ng-click="deleteProduct();">Delete</button>
       </div>
   </div>
 </form>
