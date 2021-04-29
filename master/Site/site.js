@@ -1,6 +1,6 @@
 'use strict';
 
-var myApp = angular.module('myApp.region', ['ngRoute', 'ui.bootstrap']);
+var myApp = angular.module('myApp.site', ['ngRoute', 'ui.bootstrap']);
 var tkn = localStorage.getItem("token");
 var usId = localStorage.getItem("userId");
 console.log(tkn);
@@ -9,13 +9,13 @@ myApp.run(function ($http) {
 });
 
 myApp.config(['$routeProvider', function ($routeProvider) {
-    $routeProvider.when('/region', {
-        templateUrl: "master/region/region.html",
-        controller: 'regionCtrl'
+    $routeProvider.when('/site', {
+        templateUrl: "master/site/site.html",
+        controller: 'siteCtrl'
     });
 }]);
 
-myApp.controller('regionCtrl', ['$scope', 'regionService', function ($scope, regionService) {
+myApp.controller('siteCtrl', ['$scope', 'siteService', function ($scope, siteService) {
 
 
     ////////////////pagination////////////////////
@@ -28,17 +28,17 @@ myApp.controller('regionCtrl', ['$scope', 'regionService', function ($scope, reg
     $scope.numPages = "";
     // $scope.pagesizeSelected="";
 
-    $scope.reason = [];
-    getallRegion();
-    function getallRegion() {
-        $scope.reason = [];
-        regionService.getallRegion($scope.pageIndex, $scope.pageSize).then(function (response) {
+    $scope.site = [];
+    getallSit();
+    function getallSit() {
+        $scope.site = [];
+        siteService.getallSit($scope.pageIndex, $scope.pageSize).then(function (response) {
             console.log(response.data.content);
             angular.forEach(response.data.content, function (value) {
-                $scope.reason.push({
-                    regionId: value.regionId, regionName: value.regionName, description: value.description,
+                $scope.site.push({
+                    siteId: value.siteId, siteName: value.siteName, description: value.description,
                     createdDate: value.insertedDate, updatedDate: value.updatedDate, createdBy: value.createdBy.userName,
-
+                    // updatedBy: value.updatedBy.userName
                 });
                 $scope.totalItems = response.data.totalElements;
                 $scope.numPages = response.data.totalPages;
@@ -47,8 +47,8 @@ myApp.controller('regionCtrl', ['$scope', 'regionService', function ($scope, reg
     }
 
 
-    $scope.rags = {
-        categoryName: "",
+    $scope.sit = {
+        siteName: "",
         // categoryCode: "",
         description: "",
         createdBy:
@@ -62,18 +62,18 @@ myApp.controller('regionCtrl', ['$scope', 'regionService', function ($scope, reg
 
     $scope.changePageSize = function () {
         $scope.pageIndex = 0;
-        getallRegion();
+        getallSit();
     }
 
     $scope.pageChange = function () {
         $scope.pageIndex = $scope.pageIndex - 1;
-        getallRegion($scope.pageIndex, $scope.pageSize);
+        getallSit($scope.pageIndex, $scope.pageSize);
         $scope.pageIndex = $scope.pageIndex + 1;
     }
 
 
     ///////////////end of pagination///////////////////
-    $scope.rags = {
+    $scope.sit = {
         createdBy: {
             userId: usId
         },
@@ -82,18 +82,18 @@ myApp.controller('regionCtrl', ['$scope', 'regionService', function ($scope, reg
         },
         description: "",
         // categoryCode: "",
-        categoryName: "",
-        categoryId: ""
+        siteName: "",
+        siteId: ""
     };
 
-    $scope.editRegion = function (x) {
-        $scope.rags.regionName = x.regionName;
-        $scope.rags.description = x.description;
-        $scope.rags.regionId = x.regionId;
+    $scope.editSit = function (x) {
+        $scope.sit.siteName = x.siteName;
+        $scope.sit.description = x.description;
+        $scope.sit.siteId = x.siteId;
         // $scope.cats.categoryCode = x.categoryCode;
-        console.log($scope.rags);
+        console.log($scope.sit);
     }
-    $scope.deleteRegion = function () {
+    $scope.deleteSit = function () {
 
         Swal.fire({
             title: "Are you sure?",
@@ -104,25 +104,25 @@ myApp.controller('regionCtrl', ['$scope', 'regionService', function ($scope, reg
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                regionService.deleteRegion($scope.rags).then(function () {
+                siteService.deleteSit($scope.sit).then(function () {
                     $scope.pageChange();
                     Swal.fire("Deleted!");
                 });
-                $scope.loadRegion();
+                $scope.loadSit();
             }
         });
 
 
     }
-    $scope.clearRegion = function () {
-        $scope.rags.regionName = "";
-        $scope.rags.description = "";
-        $scope.rags.regionId = "";
+    $scope.clearSit = function () {
+        $scope.sit.siteName = "";
+        $scope.sit.description = "";
+        $scope.sit.siteId = "";
         // $scope.cats.categoryCode = "";
-        console.log($scope.rags);
+        console.log($scope.sit);
     }
-    $scope.addRegion = function () {
-        categoryService.addRegion($scope.rags).then(function (response) {
+    $scope.addSit = function () {
+        siteService.addSit($scope.sit).then(function (response) {
             $scope.pageChange();
             if (response.data.responseCode == 201) {
                 Swal.fire({
@@ -136,23 +136,23 @@ myApp.controller('regionCtrl', ['$scope', 'regionService', function ($scope, reg
             else {
                 swal("Failed!", "", "warning");
             }
-            $scope.loadRegion();
+            $scope.loadSit();
         });
 
     }
 
-    $scope.tabShow = true;
+    $scope.siteShow = true;
 
-    $scope.closeReg = function () {
-        $scope.regpop = false;
+    $scope.closeSitz = function () {
+        $scope.sitepop = false;
     }
 
-    $scope.addReg = function () {
-        $scope.regpop = $scope.addregbtn = true; $scope.regedit = $scope.regdelete = false;
+    $scope.addSitz = function () {
+        $scope.sitepop = $scope.addsitebtn = true; $scope.siteedit = $scope.sitedelete = false;
     }
 
-    $scope.loadRegion = function () {
-        $scope.tabShow = true; $scope.regpop = false;
+    $scope.loadSit = function () {
+        $scope.siteShow = true; $scope.sitepop = false;
     }
 
 }]);

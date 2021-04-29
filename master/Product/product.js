@@ -49,7 +49,7 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
 
     $scope.pro = {
         productName: "",
-        // categoryCode: "",
+        productCode: "",
         description: "",
         createdBy:
         {
@@ -73,24 +73,12 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
 
 
     ///////////////end of pagination///////////////////
-    $scope.pro = {
-        createdBy: {
-            userId: usId
-        },
-        updatedBy: {
-            userId: usId
-        },
-        description: "",
-        // categoryCode: "",
-        productName: "",
-        productId: ""
-    };
 
     $scope.editProduct = function (x) {
-        $scope.pro.productName = x.productName;
-        $scope.pro.description = x.description;
         $scope.pro.productId = x.productId;
-        // $scope.cats.categoryCode = x.categoryCode;
+        $scope.pro.productName = x.productName;
+        $scope.pro.productCode = x.productCode;
+        $scope.pro.description = x.description;
         console.log($scope.pro);
     }
     $scope.deleteProduct = function () {
@@ -115,10 +103,13 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
 
     }
     $scope.clearProduct = function () {
-        $scope.pro.productName = "";
-        $scope.pro.description = "";
         $scope.pro.productId = "";
-        // $scope.cats.categoryCode = "";
+        $scope.pro.productName = "";
+        $scope.pro.productCode = "";
+        $scope.pro.description = "";
+        $scope.pro.specification = "";
+        $scope.pro.productBarcode = "";
+        $scope.pro.productType = "";
         console.log($scope.pro);
     }
     $scope.addProduct = function () {

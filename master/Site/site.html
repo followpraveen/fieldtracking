@@ -1,5 +1,4 @@
 <div class="content-wrapper">
-    
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -10,7 +9,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Master</a></li>
-                        <li class="breadcrumb-item active">Product</li>
+                        <li class="breadcrumb-item active">Site</li>
                     </ol>
                 </div>
                 <!-- /.col -->
@@ -100,12 +99,12 @@
       <!-- Button Created -->
       <div class="btnz-holder">
         <button class="btnz btnz-2 hover-opacity">
-          <a href=""><span ng-click="addDuct(); clearProduct(); $parent.proedit=$parent.prodelete=false;">Add Product</span></a>
+          <a href=""><span ng-click="addSitz(); clearSit(); $parent.siteedit=$parent.sitedelete=false;">Add Site</span></a>
         </button>
     </div>
 
   <!-- Content Header (Page header) -->
-  <div class="content-header" ng-show="proShow">
+  <div class="content-header" ng-show="siteShow">
     <div class="container-fluid">
       <div class="section-body mt-4">
       <div class="tab-content">
@@ -117,7 +116,6 @@
                               <tr>
                                   <th>Id</th>
                                   <th>Name</th>
-                                  <th>Code</th>
                                   <th>Description</th>
                                   <th>Created date</th>
                                   <th>Updated date</th>
@@ -127,11 +125,10 @@
                               </tr>
                           </thead>
                           <tbody>
-                              <tr ng-repeat = "x in prods"
-                              ng-click="editProduct(x); $parent.propop=true;$parent.proedit=$parent.prodelete=true;$parent.addprobtn=false;">
-                                  <td>{{x.productId}}</td>
-                                  <td>{{x.productName}}</td>
-                                  <td>{{x.prodductCode}}</td>
+                              <tr ng-repeat = "x in site"
+                              ng-click="editSit(x); $parent.sitepop=true;$parent.siteedit=$parent.sitedelete=true;$parent.addsitebtn=false;">
+                                  <td>{{x.siteId}}</td>
+                                  <td>{{x.siteName}}</td>
                                   <td>{{x.description}}</td>
                                   <td>{{x.createdDate}}</td>
                                   <td>{{x.updatedDate}}</td>
@@ -180,71 +177,39 @@
 </div>
 
 <!---------------- Add Category part start ---------------->
-<div class="content-wrapper" ng-show="propop">
+<div class="content-wrapper" ng-show="sitepop">
 <form class="card-body was-validated" name="myform">
   <div class="form-group row">
       <div class="col-md-12">
-        <label class="col-form-label blu-colr">Products</label>
-        <a href="" ng-click="closeDuct(); loadProduct();"><i class="fa fa-times float-right"></i></a>
+        <label class="col-form-label blu-colr">Site</label>
+        <a href="" ng-click="closeSitz(); loadSit();"><i class="fa fa-times float-right"></i></a>
       </div>
   </div>
   <div class="form-group row">
-      <label class="col-md-3 col-form-label">Product Name</label>
+      <label class="col-md-3 col-form-label">Site Name</label>
       <div class="col-md-7">
-          <input type="text" maxlength="30" class="form-control" ng-model="pro.productName" name="name" 
+          <input type="text" maxlength="30" class="form-control" ng-model="sit.siteName" name="name" 
           placeholder="max characters 30" required>
           <div class="invalid-feedback">*required</div>
       </div>
   </div>
   <div class="form-group row">
-    <label class="col-md-3 col-form-label">Product Code</label>
-    <div class="col-md-7">
-        <input type="text" maxlength="30" class="form-control" ng-model="pro.productCode" name="code" 
-        placeholder="max characters 30" required>
-        <div class="invalid-feedback">*required</div>
-    </div>
-</div>
-<div class="form-group row">
-  <label class="col-md-3 col-form-label">Specification</label>
-  <div class="col-md-7">
-      <input type="text" maxlength="30" class="form-control" ng-model="pro.specification" name="specification" 
-      placeholder="max characters 30" required>
-      <div class="invalid-feedback">*required</div>
-  </div>
-</div>
-<div class="form-group row">
-  <label class="col-md-3 col-form-label">Product Barcode</label>
-  <div class="col-md-7">
-      <input type="text" maxlength="30" class="form-control" ng-model="pro.productBarcode" name="product barcode" 
-      placeholder="max characters 30" required>
-      <div class="invalid-feedback">*required</div>
-  </div>
-</div>
-<div class="form-group row">
-  <label class="col-md-3 col-form-label">Product Type</label>
-  <div class="col-md-7">
-      <input type="text" maxlength="30" class="form-control" ng-model="pro.productType" name="product type" 
-      placeholder="max characters 30" required>
-      <div class="invalid-feedback">*required</div>
-  </div>
-</div>
-  <div class="form-group row">
       <label class="col-md-3 col-form-label">Description</label>
       <div class="col-md-7">
         <input maxlength="250" class="form-control no-resize" placeholder="max characters 250"
-        ng-model="pro.description"  name="descript" required>
+        ng-model="sit.description"  name="descript" required>
           <div class="invalid-feedback">*required</div>
       </div>
   </div>
   <div class="form-group row">
       <label class="col-md-3 col-form-label"></label>
       <div class="col-md-7">
-          <button type="submit" class="btn btn-outline-primary" ng-show="addprobtn" ng-click="addDuct(); loadProduct();"
+          <button type="submit" class="btn btn-outline-primary" ng-show="addsitebtn" ng-click="addSit(); loadSit();"
           ng-disabled= !myform.name.$valid||!myform.descript.$valid>Add</button>
-          <button type="submit" class="btn btn-outline-primary" ng-show="proedit" ng-click="addDduct(); loadProduct();"
+          <button type="submit" class="btn btn-outline-primary" ng-show="siteedit" ng-click="addSit(); loadSit();"
           ng-disabled= !myform.name.$valid||!myform.descript.$valid>Update</button>
-          <button type="submit" class="btn btn-outline-danger" ng-show="prodelete"
-          ng-click="deleteProduct();">Delete</button>
+          <button type="submit" class="btn btn-outline-danger" ng-show="sitedelete"
+          ng-click="deleteSit();">Delete</button>
       </div>
   </div>
 </form>
