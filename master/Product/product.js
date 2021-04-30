@@ -37,8 +37,11 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
             console.log(response.data.content);
             angular.forEach(response.data.content, function (value) {
                 $scope.prods.push({
-                    productId: value.productId, productName: value.productName, description: value.description,
-                    createdDate: value.insertedDate, updatedDate: value.updatedDate, createdBy: value.createdBy.userName
+                    productId: value.productId, productName: value.productName, productCode: value.productCode,
+                    description: value.description, specification: value.specification, productBarcode: value.productBarcode,
+                    productType: value.productType, createdDate: value.insertedDate, updatedDate: value.updatedDate,
+                    createdBy: value.createdBy.userName,
+                    // updatedBy: value.updatedBy.userName,
                 });
                 $scope.totalItems = response.data.totalElements;
                 $scope.numPages = response.data.totalPages;
@@ -48,9 +51,13 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
 
 
     $scope.pro = {
+        productId: "",
         productName: "",
         productCode: "",
         description: "",
+        specification: "",
+        productBarcode: "",
+        productType: "",
         createdBy:
         {
             userId: usId
@@ -79,10 +86,12 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
         $scope.pro.productName = x.productName;
         $scope.pro.productCode = x.productCode;
         $scope.pro.description = x.description;
+        $scope.pro.specification = x.specification;
+        $scope.pro.productBarcode = x.productBarcode;
+        $scope.pro.productType = x.productType;
         console.log($scope.pro);
     }
     $scope.deleteProduct = function () {
-
         Swal.fire({
             title: "Are you sure?",
             icon: "warning",
@@ -92,7 +101,7 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                productService.deleteProduct($scope.pro).then(function () {
+                productService.deleteProduct($scope.pro.productId).then(function () {
                     $scope.pageChange();
                     Swal.fire("Deleted!");
                 });
@@ -103,8 +112,8 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
 
     }
     $scope.clearProduct = function () {
-        $scope.pro.productId = "";
-        $scope.pro.productName = "";
+        $scope.pro.productId = "",
+            $scope.pro.productName = "";
         $scope.pro.productCode = "";
         $scope.pro.description = "";
         $scope.pro.specification = "";
@@ -132,6 +141,7 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
 
     }
 
+
     $scope.proShow = true;
 
     $scope.closeDuct = function () {
@@ -139,7 +149,7 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
     }
 
     $scope.addDuct = function () {
-        $scope.propop = $scope.addprobtn = true; $scope.proedit = $scope.prodelete = false;
+        $scope.propop = $scope.addprobtn = true; $scope.proedit = $scope.proShow = $scope.prodelete = false;
     }
 
     $scope.loadProduct = function () {

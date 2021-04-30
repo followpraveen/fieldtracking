@@ -119,6 +119,9 @@
                                   <th>Name</th>
                                   <th>Code</th>
                                   <th>Description</th>
+                                  <th>Specification</th>
+                                  <th>Barcode</th>
+                                  <th>Type</th>
                                   <th>Created date</th>
                                   <th>Updated date</th>
                                   <th>Created By</th>
@@ -128,11 +131,16 @@
                           </thead>
                           <tbody>
                               <tr ng-repeat = "x in prods"
-                              ng-click="editProduct(x); $parent.propop=true;$parent.proedit=$parent.prodelete=true;$parent.addprobtn=false;">
-                                  <td>{{x.productId}}</td>
+                              ng-click="editProduct(x); $parent.propop=true;$parent.proedit=$parent.prodelete=true;$parent.addprobtn=$parent.proShow=false;">
+                               
+                              <td>{{x.productId}}</td>
                                   <td>{{x.productName}}</td>
-                                  <td>{{x.prodductCode}}</td>
+                                  
+                                  <td>{{x.productCode}}</td>   
                                   <td>{{x.description}}</td>
+                                  <td>{{x.specification}}</td>
+                                  <td>{{x.productBarcode}}</td>
+                                  <td>{{x.productType}}</td>
                                   <td>{{x.createdDate}}</td>
                                   <td>{{x.updatedDate}}</td>
                                   <td>{{x.createdBy}}</td>
@@ -182,7 +190,7 @@
 <!---------------- Add Category part start ---------------->
 <div class="content-wrapper" ng-show="propop">
 <form class="card-body was-validated" name="myform">
-  <div class="form-group row">
+  <div class="form-group row pop-up">
       <div class="col-md-12">
         <label class="col-form-label blu-colr">Products</label>
         <a href="" ng-click="closeDuct(); loadProduct();"><i class="fa fa-times float-right"></i></a>
@@ -239,12 +247,12 @@
   <div class="form-group row">
       <label class="col-md-3 col-form-label"></label>
       <div class="col-md-7">
-          <button type="submit" class="btn btn-outline-primary" ng-show="addprobtn" ng-click="addDuct(); loadProduct();"
+          <button type="submit" class="btn btn-outline-primary" ng-show="addprobtn" ng-click="addProduct();"
           ng-disabled= !myform.name.$valid||!myform.descript.$valid>Add</button>
-          <button type="submit" class="btn btn-outline-primary" ng-show="proedit" ng-click="addDduct(); loadProduct();"
+          <button type="submit" class="btn btn-outline-primary" ng-show="proedit" ng-click="addProduct();"
           ng-disabled= !myform.name.$valid||!myform.descript.$valid>Update</button>
           <button type="submit" class="btn btn-outline-danger" ng-show="prodelete"
-          ng-click="deleteProduct();">Delete</button>
+          ng-click="deleteProduct(x);">Delete</button>
       </div>
   </div>
 </form>

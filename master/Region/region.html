@@ -99,7 +99,8 @@
       <!-- Button Created -->
       <div class="btnz-holder">
         <button class="btnz btnz-2 hover-opacity">
-          <a href=""><span ng-click="addReg(); clearRegion(); $parent.regedit=$parent.regdelete=false;">Add Region</span></a>
+          <a href=""><span ng-click="addReg(); clearRegion(); 
+            $parent.regedit=$parent.regdelete=false;">Add Region</span></a>
         </button>
     </div>
 
@@ -116,7 +117,9 @@
                               <tr>
                                   <th>Id</th>
                                   <th>Name</th>
+                                  <th>Code</th>
                                   <th>Description</th>
+                                  <th>Location</th>
                                   <th>Created date</th>
                                   <th>Updated date</th>
                                   <th>Created By</th>
@@ -126,10 +129,12 @@
                           </thead>
                           <tbody>
                               <tr ng-repeat = "x in reason"
-                              ng-click="editRegion(x); $parent.regpop=true;$parent.regedit=$parent.regdelete=true;$parent.addregbtn=false;">
+                              ng-click="editRegion(x); $parent.regpop=true;$parent.regedit=$parent.regdelete=true;$parent.addregbtn=$parent.tabShow=false;">
                                   <td>{{x.regionId}}</td>
                                   <td>{{x.regionName}}</td>
+                                  <td>{{x.regionCode}}</td>
                                   <td>{{x.description}}</td>
+                                  <td>{{x.location}}</td>
                                   <td>{{x.createdDate}}</td>
                                   <td>{{x.updatedDate}}</td>
                                   <td>{{x.createdBy}}</td>
@@ -179,7 +184,7 @@
 <!---------------- Add Category part start ---------------->
 <div class="content-wrapper" ng-show="regpop">
 <form class="card-body was-validated" name="myform">
-  <div class="form-group row">
+  <div class="form-group row pop-up">
       <div class="col-md-12">
         <label class="col-form-label blu-colr">Regions</label>
         <a href="" ng-click="closeReg(); loadRegion();"><i class="fa fa-times float-right"></i></a>
@@ -194,6 +199,22 @@
       </div>
   </div>
   <div class="form-group row">
+    <label class="col-md-3 col-form-label">Region Code</label>
+    <div class="col-md-7">
+        <input type="text" maxlength="30" class="form-control" ng-model="rags.regionCode" name="code" 
+        placeholder="max characters 30" required>
+        <div class="invalid-feedback">*required</div>
+    </div>
+</div>
+<div class="form-group row">
+  <label class="col-md-3 col-form-label">Location</label>
+  <div class="col-md-7">
+      <input type="text" maxlength="30" class="form-control" ng-model="rags.location" name="location" 
+      placeholder="max characters 30" required>
+      <div class="invalid-feedback">*required</div>
+  </div>
+</div>
+  <div class="form-group row">
       <label class="col-md-3 col-form-label">Description</label>
       <div class="col-md-7">
         <input maxlength="250" class="form-control no-resize" placeholder="max characters 250"
@@ -204,9 +225,9 @@
   <div class="form-group row">
       <label class="col-md-3 col-form-label"></label>
       <div class="col-md-7">
-          <button type="submit" class="btn btn-outline-primary" ng-show="addregbtn" ng-click="addReg(); loadRegion();"
+          <button type="submit" class="btn btn-outline-primary" ng-show="addregbtn" ng-click="addRegion();"
           ng-disabled= !myform.name.$valid||!myform.descript.$valid>Add</button>
-          <button type="submit" class="btn btn-outline-primary" ng-show="regedit" ng-click="addReg(); loadRegion();"
+          <button type="submit" class="btn btn-outline-primary" ng-show="regedit" ng-click="addRegion();"
           ng-disabled= !myform.name.$valid||!myform.descript.$valid>Update</button>
           <button type="submit" class="btn btn-outline-danger" ng-show="regdelete"
           ng-click="deleteRegion();">Delete</button>

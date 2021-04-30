@@ -126,7 +126,7 @@
                           </thead>
                           <tbody>
                               <tr ng-repeat = "x in categ"
-                              ng-click="editcats(x); $parent.catpop=true;$parent.catedit=$parent.catdelete=true;$parent.addcatbtn=false;">
+                              ng-click="editcats(x); $parent.catpop=true;$parent.catedit=$parent.catdelete=true;$parent.addcatbtn=$parent.tabShow=false;">
                                   <td>{{x.categoryId}}</td>
                                   <td>{{x.categoryName}}</td>
                                   <td>{{x.description}}</td>
@@ -178,7 +178,7 @@
 
 <!---------------- Add Category part start ---------------->
 <div class="content-wrapper" ng-show="catpop">
-<form class="card-body was-validated" name="myform">
+<form class="card-body was-validated pop-up" name="myform">
   <div class="form-group row">
       <div class="col-md-12">
         <label class="col-form-label blu-colr">Categories</label>
@@ -204,9 +204,9 @@
   <div class="form-group row">
       <label class="col-md-3 col-form-label"></label>
       <div class="col-md-7">
-          <button type="submit" class="btn btn-outline-primary" ng-show="addcatbtn" ng-click="addcats(); loadCategory();"
+          <button type="submit" class="btn btn-outline-primary" ng-show="addcatbtn" ng-click="addcats();"
           ng-disabled= !myform.name.$valid||!myform.descript.$valid>Add</button>
-          <button type="submit" class="btn btn-outline-primary" ng-show="catedit" ng-click="addcats(); loadCategory();"
+          <button type="submit" class="btn btn-outline-primary" ng-show="catedit" ng-click="addcats();"
           ng-disabled= !myform.name.$valid||!myform.descript.$valid>Update</button>
           <button type="submit" class="btn btn-outline-danger" ng-show="catdelete"
           ng-click="deletecats();">Delete</button>

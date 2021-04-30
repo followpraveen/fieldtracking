@@ -37,7 +37,8 @@ myApp.controller('categoryCtrl', ['$scope', 'categoryService', function ($scope,
       angular.forEach(response.data.content, function (value) {
         $scope.categ.push({
           categoryId: value.categoryId, categoryName: value.categoryName, description: value.description,
-          createdDate: value.insertedDate, updatedDate: value.updatedDate, createdBy: value.createdBy.userName
+          createdDate: value.insertedDate, updatedDate: value.updatedDate, createdBy: value.createdBy.userName,
+          // updatedBy: value.updatedBy.userName
         });
         $scope.totalItems = response.data.totalElements;
         $scope.numPages = response.data.totalPages;
@@ -147,7 +148,7 @@ myApp.controller('categoryCtrl', ['$scope', 'categoryService', function ($scope,
   }
 
   $scope.addcat = function () {
-    $scope.catpop = $scope.addcatbtn = true; $scope.catedit = $scope.catdelete = false;
+    $scope.catpop = $scope.addcatbtn = true; $scope.catedit = $scope.tabShow = $scope.catdelete = false;
   }
 
   $scope.loadCategory = function () {

@@ -36,8 +36,10 @@ myApp.controller('regionCtrl', ['$scope', 'regionService', function ($scope, reg
             console.log(response.data.content);
             angular.forEach(response.data.content, function (value) {
                 $scope.reason.push({
-                    regionId: value.regionId, regionName: value.regionName, description: value.description,
-                    createdDate: value.insertedDate, updatedDate: value.updatedDate, createdBy: value.createdBy.userName,
+                    regionId: value.regionId, regionName: value.regionName, regionCode: value.regionCode,
+                    description: value.description, location: value.location, createdDate: value.insertedDate,
+                    updatedDate: value.updatedDate, createdBy: value.createdBy.userName,
+                    updatedBy: value.updatedBy.userName
 
                 });
                 $scope.totalItems = response.data.totalElements;
@@ -48,9 +50,11 @@ myApp.controller('regionCtrl', ['$scope', 'regionService', function ($scope, reg
 
 
     $scope.rags = {
-        categoryName: "",
-        // categoryCode: "",
+        regionId: "",
+        regionName: "",
+        regionCode: "",
         description: "",
+        location: "",
         createdBy:
         {
             userId: usId
@@ -73,24 +77,26 @@ myApp.controller('regionCtrl', ['$scope', 'regionService', function ($scope, reg
 
 
     ///////////////end of pagination///////////////////
-    $scope.rags = {
-        createdBy: {
-            userId: usId
-        },
-        updatedBy: {
-            userId: usId
-        },
-        description: "",
-        // categoryCode: "",
-        categoryName: "",
-        categoryId: ""
-    };
+    // $scope.rags = {
+    //     createdBy: {
+    //         userId: usId
+    //     },
+    //     updatedBy: {
+    //         userId: usId
+    //     },
+    //     regionName: "",
+    //     regionCode: "",
+    //     description: "",
+    //     location: "",
+    // };
 
     $scope.editRegion = function (x) {
+        $scope.rags.regionId = x.regionId;
         $scope.rags.regionName = x.regionName;
         $scope.rags.description = x.description;
         $scope.rags.regionId = x.regionId;
-        // $scope.cats.categoryCode = x.categoryCode;
+        $scope.rags.regionCode = x.regionCode;
+        $scope.rags.location = x.location;
         console.log($scope.rags);
     }
     $scope.deleteRegion = function () {
@@ -115,14 +121,16 @@ myApp.controller('regionCtrl', ['$scope', 'regionService', function ($scope, reg
 
     }
     $scope.clearRegion = function () {
-        $scope.rags.regionName = "";
+        $scope.rags.regionId = "",
+            $scope.rags.regionName = "";
         $scope.rags.description = "";
         $scope.rags.regionId = "";
-        // $scope.cats.categoryCode = "";
+        $scope.rags.regionCode = "";
+        $scope.rags.location = "";
         console.log($scope.rags);
     }
     $scope.addRegion = function () {
-        categoryService.addRegion($scope.rags).then(function (response) {
+        regionService.addRegion($scope.rags).then(function (response) {
             $scope.pageChange();
             if (response.data.responseCode == 201) {
                 Swal.fire({
@@ -148,7 +156,7 @@ myApp.controller('regionCtrl', ['$scope', 'regionService', function ($scope, reg
     }
 
     $scope.addReg = function () {
-        $scope.regpop = $scope.addregbtn = true; $scope.regedit = $scope.regdelete = false;
+        $scope.regpop = $scope.addregbtn = true; $scope.regedit = $scope.tabShow = $scope.regdelete = false;
     }
 
     $scope.loadRegion = function () {

@@ -36,8 +36,9 @@ myApp.controller('siteCtrl', ['$scope', 'siteService', function ($scope, siteSer
             console.log(response.data.content);
             angular.forEach(response.data.content, function (value) {
                 $scope.site.push({
-                    siteId: value.siteId, siteName: value.siteName, description: value.description,
-                    createdDate: value.insertedDate, updatedDate: value.updatedDate, createdBy: value.createdBy.userName,
+                    siteId: value.siteId, siteName: value.siteName, siteCode: value.siteCode,
+                    description: value.description, location: value.location, createdDate: value.insertedDate,
+                    updatedDate: value.updatedDate, createdBy: value.createdBy.userName,
                     // updatedBy: value.updatedBy.userName
                 });
                 $scope.totalItems = response.data.totalElements;
@@ -48,9 +49,11 @@ myApp.controller('siteCtrl', ['$scope', 'siteService', function ($scope, siteSer
 
 
     $scope.sit = {
+        siteId: "",
         siteName: "",
-        // categoryCode: "",
+        siteCode: "",
         description: "",
+        location: "",
         createdBy:
         {
             userId: usId
@@ -73,24 +76,25 @@ myApp.controller('siteCtrl', ['$scope', 'siteService', function ($scope, siteSer
 
 
     ///////////////end of pagination///////////////////
-    $scope.sit = {
-        createdBy: {
-            userId: usId
-        },
-        updatedBy: {
-            userId: usId
-        },
-        description: "",
-        // categoryCode: "",
-        siteName: "",
-        siteId: ""
-    };
+    // $scope.sit = {
+    //     createdBy: {
+    //         userId: usId
+    //     },
+    //     updatedBy: {
+    //         userId: usId
+    //     },
+    //     description: "",
+    //     // categoryCode: "",
+    //     siteName: "",
+    //     siteId: ""
+    // };
 
     $scope.editSit = function (x) {
-        $scope.sit.siteName = x.siteName;
-        $scope.sit.description = x.description;
         $scope.sit.siteId = x.siteId;
-        // $scope.cats.categoryCode = x.categoryCode;
+        $scope.sit.siteName = x.siteName;
+        $scope.sit.siteCode = x.siteCode;
+        $scope.sit.description = x.description;
+        $scope.sit.location = x.location;
         console.log($scope.sit);
     }
     $scope.deleteSit = function () {
@@ -116,9 +120,10 @@ myApp.controller('siteCtrl', ['$scope', 'siteService', function ($scope, siteSer
     }
     $scope.clearSit = function () {
         $scope.sit.siteName = "";
+        $scope.sit.siteCode = "";
         $scope.sit.description = "";
         $scope.sit.siteId = "";
-        // $scope.cats.categoryCode = "";
+        $scope.sit.location = "";
         console.log($scope.sit);
     }
     $scope.addSit = function () {
@@ -148,7 +153,7 @@ myApp.controller('siteCtrl', ['$scope', 'siteService', function ($scope, siteSer
     }
 
     $scope.addSitz = function () {
-        $scope.sitepop = $scope.addsitebtn = true; $scope.siteedit = $scope.sitedelete = false;
+        $scope.sitepop = $scope.addsitebtn = true; $scope.siteedit = $scope.siteShow = $scope.sitedelete = false;
     }
 
     $scope.loadSit = function () {

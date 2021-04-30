@@ -116,7 +116,9 @@
                               <tr>
                                   <th>Id</th>
                                   <th>Name</th>
+                                  <th>Code</th>
                                   <th>Description</th>
+                                  <th>Location</th>
                                   <th>Created date</th>
                                   <th>Updated date</th>
                                   <th>Created By</th>
@@ -126,10 +128,12 @@
                           </thead>
                           <tbody>
                               <tr ng-repeat = "x in site"
-                              ng-click="editSit(x); $parent.sitepop=true;$parent.siteedit=$parent.sitedelete=true;$parent.addsitebtn=false;">
+                              ng-click="editSit(x); $parent.sitepop=true;$parent.siteedit=$parent.sitedelete=true;$parent.addsitebtn=$parent.siteShow=false;">
                                   <td>{{x.siteId}}</td>
                                   <td>{{x.siteName}}</td>
+                                  <td>{{x.siteCode}}</td>
                                   <td>{{x.description}}</td>
+                                  <td>{{x.location}}</td>
                                   <td>{{x.createdDate}}</td>
                                   <td>{{x.updatedDate}}</td>
                                   <td>{{x.createdBy}}</td>
@@ -179,7 +183,7 @@
 <!---------------- Add Category part start ---------------->
 <div class="content-wrapper" ng-show="sitepop">
 <form class="card-body was-validated" name="myform">
-  <div class="form-group row">
+  <div class="form-group row pop-up">
       <div class="col-md-12">
         <label class="col-form-label blu-colr">Site</label>
         <a href="" ng-click="closeSitz(); loadSit();"><i class="fa fa-times float-right"></i></a>
@@ -194,6 +198,22 @@
       </div>
   </div>
   <div class="form-group row">
+    <label class="col-md-3 col-form-label">Site Code</label>
+    <div class="col-md-7">
+        <input type="text" maxlength="30" class="form-control" ng-model="sit.siteCode" name="code" 
+        placeholder="max characters 30" required>
+        <div class="invalid-feedback">*required</div>
+    </div>
+</div>
+<div class="form-group row">
+  <label class="col-md-3 col-form-label">Location</label>
+  <div class="col-md-7">
+      <input type="text" maxlength="30" class="form-control" ng-model="sit.location" name="location" 
+      placeholder="max characters 30" required>
+      <div class="invalid-feedback">*required</div>
+  </div>
+</div>
+  <div class="form-group row">
       <label class="col-md-3 col-form-label">Description</label>
       <div class="col-md-7">
         <input maxlength="250" class="form-control no-resize" placeholder="max characters 250"
@@ -204,9 +224,9 @@
   <div class="form-group row">
       <label class="col-md-3 col-form-label"></label>
       <div class="col-md-7">
-          <button type="submit" class="btn btn-outline-primary" ng-show="addsitebtn" ng-click="addSit(); loadSit();"
+          <button type="submit" class="btn btn-outline-primary" ng-show="addsitebtn" ng-click="addSit();"
           ng-disabled= !myform.name.$valid||!myform.descript.$valid>Add</button>
-          <button type="submit" class="btn btn-outline-primary" ng-show="siteedit" ng-click="addSit(); loadSit();"
+          <button type="submit" class="btn btn-outline-primary" ng-show="siteedit" ng-click="addSit();"
           ng-disabled= !myform.name.$valid||!myform.descript.$valid>Update</button>
           <button type="submit" class="btn btn-outline-danger" ng-show="sitedelete"
           ng-click="deleteSit();">Delete</button>

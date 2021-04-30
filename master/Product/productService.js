@@ -3,7 +3,7 @@ myApp.service('productService', ['$http', function ($http) {
     const URL = "https://executivetracking.cloudjiffy.net/ExecutiveTrackingWeb/";
 
     this.addProduct = function (pro) {
-        if (pro.productId == 0 || pro.productId == null) {
+        if (pro.productId == "" || pro.productId == null) {
             return $http({
                 method: "POST",
                 url: URL + "product/v1/createProduct",
@@ -26,10 +26,10 @@ myApp.service('productService', ['$http', function ($http) {
         });
     }
 
-    this.deleteProduct = function (pro) {
+    this.deleteProduct = function (x) {
         return $http({
             method: "DELETE",
-            url: URL + "product/v1/deleteProductByProductId/" + pro.productId
+            url: URL + "product/v1/deleteProductByProductId/" + x
         })
     }
 }]);
