@@ -22,7 +22,7 @@ myApp.controller('regionCtrl', ['$scope', 'regionService', function ($scope, reg
 
 
     $scope.pageSize = 2;
-    $scope.pageIndex = 0;
+    $scope.pageIndex = 1;
     $scope.maxSize = 6;
     $scope.totalItems = 0;
     $scope.numPages = "";
@@ -132,7 +132,7 @@ myApp.controller('regionCtrl', ['$scope', 'regionService', function ($scope, reg
     $scope.addRegion = function () {
         regionService.addRegion($scope.rags).then(function (response) {
             $scope.pageChange();
-            if (response.data.responseCode == 201) {
+            if (response.data.responseCode == 201 || 200) {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',

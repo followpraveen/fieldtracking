@@ -22,7 +22,7 @@ myApp.controller('siteCtrl', ['$scope', 'siteService', function ($scope, siteSer
 
 
     $scope.pageSize = 2;
-    $scope.pageIndex = 0;
+    $scope.pageIndex = 1;
     $scope.maxSize = 6;
     $scope.totalItems = 0;
     $scope.numPages = "";
@@ -39,7 +39,7 @@ myApp.controller('siteCtrl', ['$scope', 'siteService', function ($scope, siteSer
                     siteId: value.siteId, siteName: value.siteName, siteCode: value.siteCode,
                     description: value.description, location: value.location, createdDate: value.insertedDate,
                     updatedDate: value.updatedDate, createdBy: value.createdBy.userName,
-                    // updatedBy: value.updatedBy.userName
+                    updatedBy: value.updatedBy.userName
                 });
                 $scope.totalItems = response.data.totalElements;
                 $scope.numPages = response.data.totalPages;

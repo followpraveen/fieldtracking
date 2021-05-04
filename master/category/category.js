@@ -23,7 +23,7 @@ myApp.controller('categoryCtrl', ['$scope', 'categoryService', function ($scope,
 
   $scope.pageSize = 2;
   $scope.pageIndex = 0;
-  $scope.maxSize = 6;
+  $scope.maxSize = "";
   $scope.totalItems = 0;
   $scope.numPages = "";
   // $scope.pagesizeSelected="";
@@ -38,7 +38,7 @@ myApp.controller('categoryCtrl', ['$scope', 'categoryService', function ($scope,
         $scope.categ.push({
           categoryId: value.categoryId, categoryName: value.categoryName, description: value.description,
           createdDate: value.insertedDate, updatedDate: value.updatedDate, createdBy: value.createdBy.userName,
-          // updatedBy: value.updatedBy.userName
+          updatedBy: value.updatedBy.userName
         });
         $scope.totalItems = response.data.totalElements;
         $scope.numPages = response.data.totalPages;
@@ -73,18 +73,18 @@ myApp.controller('categoryCtrl', ['$scope', 'categoryService', function ($scope,
 
 
   ///////////////end of pagination///////////////////
-  $scope.cats = {
-    createdBy: {
-      userId: usId
-    },
-    updatedBy: {
-      userId: usId
-    },
-    description: "",
-    // categoryCode: "",
-    categoryName: "",
-    categoryId: ""
-  };
+  // $scope.cats = {
+  //   createdBy: {
+  //     userId: usId
+  //   },
+  //   updatedBy: {
+  //     userId: usId
+  //   },
+  //   description: "",
+  //   // categoryCode: "",
+  //   categoryName: "",
+  //   categoryId: ""
+  // };
 
   $scope.editcats = function (x) {
     $scope.cats.categoryName = x.categoryName;

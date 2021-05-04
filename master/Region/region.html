@@ -230,7 +230,7 @@
           <button type="submit" class="btn btn-outline-primary" ng-show="regedit" ng-click="addRegion();"
           ng-disabled= !myform.name.$valid||!myform.descript.$valid>Update</button>
           <button type="submit" class="btn btn-outline-danger" ng-show="regdelete"
-          ng-click="deleteRegion();">Delete</button>
+          ng-click="deleteRegion(); loadRegion();">Delete</button>
       </div>
   </div>
 </form>

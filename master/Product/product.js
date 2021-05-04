@@ -23,7 +23,7 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
 
 
     $scope.pageSize = 2;
-    $scope.pageIndex = 0;
+    $scope.pageIndex = 1;
     $scope.maxSize = 6;
     $scope.totalItems = 0;
     $scope.numPages = "";
@@ -41,7 +41,7 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
                     description: value.description, specification: value.specification, productBarcode: value.productBarcode,
                     productType: value.productType, createdDate: value.insertedDate, updatedDate: value.updatedDate,
                     createdBy: value.createdBy.userName,
-                    // updatedBy: value.updatedBy.userName,
+                    updatedBy: value.updatedBy.userName
                 });
                 $scope.totalItems = response.data.totalElements;
                 $scope.numPages = response.data.totalPages;
@@ -124,7 +124,7 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
     $scope.addProduct = function () {
         productService.addProduct($scope.pro).then(function (response) {
             $scope.pageChange();
-            if (response.data.responseCode == 201) {
+            if (response.data.responseCode == 201 || 200) {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',

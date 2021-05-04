@@ -252,7 +252,7 @@
           <button type="submit" class="btn btn-outline-primary" ng-show="proedit" ng-click="addProduct();"
           ng-disabled= !myform.name.$valid||!myform.descript.$valid>Update</button>
           <button type="submit" class="btn btn-outline-danger" ng-show="prodelete"
-          ng-click="deleteProduct(x);">Delete</button>
+          ng-click="deleteProduct(x); loadProduct();">Delete</button>
       </div>
   </div>
 </form>
