@@ -84,6 +84,7 @@ myApp.controller('regionCtrl', ['$scope', 'regionService', function ($scope, reg
     //     updatedBy: {
     //         userId: usId
     //     },
+    //     regionId: "",
     //     regionName: "",
     //     regionCode: "",
     //     description: "",
@@ -132,7 +133,7 @@ myApp.controller('regionCtrl', ['$scope', 'regionService', function ($scope, reg
     $scope.addRegion = function () {
         regionService.addRegion($scope.rags).then(function (response) {
             $scope.pageChange();
-            if (response.data.responseCode == 201 || 200) {
+            if (response.data.responseCode == 201) {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -148,6 +149,8 @@ myApp.controller('regionCtrl', ['$scope', 'regionService', function ($scope, reg
         });
 
     }
+
+
 
     $scope.tabShow = true;
 

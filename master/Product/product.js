@@ -124,7 +124,7 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
     $scope.addProduct = function () {
         productService.addProduct($scope.pro).then(function (response) {
             $scope.pageChange();
-            if (response.data.responseCode == 201 || 200) {
+            if (response.data.responseCode == 200) {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
