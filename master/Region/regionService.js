@@ -3,7 +3,7 @@ myApp.service('regionService', ['$http', function ($http) {
     const URL = "https://executivetracking.cloudjiffy.net/ExecutiveTrackingWeb/";
 
     this.addRegion = function (rags) {
-        if (rags.regionId == " " || rags.regionId == null) {
+        if (rags.regionId == "0" || rags.regionId == null) {
             return $http({
                 method: "POST",
                 url: URL + "region/v1/createRegion",
