@@ -113,7 +113,7 @@ myApp.controller('regionCtrl', ['$scope', 'regionService', function ($scope, reg
             if (result.isConfirmed) {
                 regionService.deleteRegion($scope.rags).then(function () {
                     $scope.pageChange();
-                    Swal.fire("Deleted!");
+                    Swal.fire("Region Deleted Successfully");
                 });
                 $scope.loadRegion();
             }
@@ -137,13 +137,13 @@ myApp.controller('regionCtrl', ['$scope', 'regionService', function ($scope, reg
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Done!',
+                    title: 'Region Successfully Created!',
                     showConfirmButton: false,
                     timer: 1500
                 })
             }
             else {
-                swal("Failed!", "", "warning");
+                swal.fire("Region Already Exist");
             }
             $scope.loadRegion();
         });

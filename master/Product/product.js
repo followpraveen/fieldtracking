@@ -101,9 +101,9 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                productService.deleteProduct($scope.pro.productId).then(function () {
+                productService.deleteProduct($scope.pro).then(function () {
                     $scope.pageChange();
-                    Swal.fire("Deleted!");
+                    Swal.fire("Product Deleted Successfully");
                 });
                 $scope.loadProduct();
             }
@@ -128,13 +128,13 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Done!',
+                    title: 'Product Successfully Created!',
                     showConfirmButton: false,
                     timer: 1500
                 })
             }
             else {
-                swal("Failed!", "", "warning");
+                swal.fire("Product Already Exist");
             }
             $scope.loadProduct();
         });

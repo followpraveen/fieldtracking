@@ -106,7 +106,7 @@ myApp.controller('categoryCtrl', ['$scope', 'categoryService', function ($scope,
       if (result.isConfirmed) {
         categoryService.deletecats($scope.cats).then(function () {
           $scope.pageChange();
-          Swal.fire("Deleted!");
+          Swal.fire("Category Deleted Successfully!");
         });
         $scope.loadCategory();
       }
@@ -128,13 +128,13 @@ myApp.controller('categoryCtrl', ['$scope', 'categoryService', function ($scope,
         Swal.fire({
           position: 'center',
           icon: 'success',
-          title: 'Done!',
+          title: 'Category Successfully Created!',
           showConfirmButton: false,
           timer: 1500
         })
       }
       else {
-        swal("Failed!", "", "warning");
+        swal.fire("Category Already Exist");
       }
       $scope.loadCategory();
     });

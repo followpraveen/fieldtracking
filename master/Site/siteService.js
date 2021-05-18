@@ -3,7 +3,7 @@ myApp.service('siteService', ['$http', function ($http) {
     const URL = "https://executivetracking.cloudjiffy.net/ExecutiveTrackingWeb/";
 
     this.addSit = function (sit) {
-        if (sit.siteId == "0" || sit.siteId == null) {
+        if (sit.siteId == 0 || sit.siteId == null) {
             return $http({
                 method: "POST",
                 url: URL + "site/v1/createSite",

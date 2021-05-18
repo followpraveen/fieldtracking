@@ -229,7 +229,7 @@
           <button type="submit" class="btn btn-outline-primary" ng-show="siteedit" ng-click="addSit();"
           ng-disabled= !myform.name.$valid||!myform.descript.$valid>Update</button>
           <button type="submit" class="btn btn-outline-danger" ng-show="sitedelete"
-          ng-click="deleteSit();">Delete</button>
+          ng-click="deleteSit(); loadSit();">Delete</button>
       </div>
   </div>
 </form>

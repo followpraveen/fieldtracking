@@ -110,9 +110,10 @@ myApp.controller('siteCtrl', ['$scope', 'siteService', function ($scope, siteSer
             if (result.isConfirmed) {
                 siteService.deleteSit($scope.sit).then(function () {
                     $scope.pageChange();
-                    Swal.fire("Deleted!");
+                    Swal.fire("Site Deleted Successfully");
+                    $scope.loadSit();
                 });
-                $scope.loadSit();
+
             }
         });
 
@@ -133,13 +134,13 @@ myApp.controller('siteCtrl', ['$scope', 'siteService', function ($scope, siteSer
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Done!',
+                    title: 'Site Successfully Created!',
                     showConfirmButton: false,
                     timer: 1500
                 })
             }
             else {
-                swal("Failed!", "", "warning");
+                swal.fire("Site Already Exist");
             }
             $scope.loadSit();
         });
