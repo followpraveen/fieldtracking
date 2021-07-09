@@ -28,7 +28,7 @@ myApp.service('regionService', ['$http', function ($http) {
     this.deleteRegion = function (rags) {
         return $http({
             method: "DELETE",
-            url: URL + "region/v1/deleteRegionByRegionId/" + rags.regionId
+            url: URL + "region/v1/deleteRegionById/" + rags.regionId
         })
     }
 }]);

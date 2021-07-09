@@ -29,7 +29,7 @@ myApp.service('productService', ['$http', function ($http) {
     this.deleteProduct = function (pro) {
         return $http({
             method: "DELETE",
-            url: URL + "product/v1/deleteProductByProductId/" + pro.productId
+            url: URL + "product/v1/deleteProductById/" + pro.productId
         })
     }
 }]);

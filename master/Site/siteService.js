@@ -29,7 +29,7 @@ myApp.service('siteService', ['$http', function ($http) {
     this.deleteSit = function (sit) {
         return $http({
             method: "DELETE",
-            url: URL + "site/v1/deleteSiteBySiteId/" + sit.siteId
+            url: URL + "site/v1/deleteSiteById/" + sit.siteId
         })
     }
 }]);

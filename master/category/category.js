@@ -132,8 +132,15 @@ myApp.controller('categoryCtrl', ['$scope', 'categoryService', function ($scope,
           showConfirmButton: false,
           timer: 1500
         })
-      }
-      else {
+      } else if (response.data.responseCode == 200) {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Category Successfully Updated!',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }  else {
         swal.fire("Category Already Exist");
       }
       $scope.loadCategory();

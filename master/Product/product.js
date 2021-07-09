@@ -10,7 +10,7 @@ myApp.run(function ($http) {
 
 myApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/product', {
-        templateUrl: "master/product/product.html",
+        templateUrl: "masters/product/product.html",
         controller: 'productCtrl'
     });
 }]);
@@ -113,7 +113,7 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
     }
     $scope.clearProduct = function () {
         $scope.pro.productId = "",
-            $scope.pro.productName = "";
+        $scope.pro.productName = "";
         $scope.pro.productCode = "";
         $scope.pro.description = "";
         $scope.pro.specification = "";
@@ -132,8 +132,7 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
                     showConfirmButton: false,
                     timer: 1500
                 })
-            }
-            else {
+            }  else {
                 swal.fire("Product Already Exist");
             }
             $scope.loadProduct();
